@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Platform for Educators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: url(new.jpg);
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        #quizForm {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form action="last.html"></form>
+    <h1>Quiz Platform for Educators</h1>
+
+    <div id="quizForm">
+        <h2>Create a Quiz</h2>
+
+        <form onsubmit="createQuiz(event)">
+            <label for="quizTitle">Quiz Title:</label>
+            <input type="text" id="quizTitle" name="quizTitle" required>
+
+            <label for="question">Question:</label>
+            <input type="text" id="question" name="question" required>
+
+            <label>Options:</label>
+            <div id="optionsContainer">
+                <input type="text" name="option[]" placeholder="Option 1" required>
+                <br>
+                <input type="text" name="option[]" placeholder="Option 2" required>
+                <br>
+            </div>
+
+            <label for="correctAnswer">Correct Answer:</label>
+            <select id="correctAnswer" name="correctAnswer" required>
+                <!-- Options will be dynamically added using JavaScript -->
+            </select>
+
+            <button type="button" onclick="addOption()">Add Option</button>
+
+            <button type="submit">Create Quiz</button>
+        </form>
+    </div>
+
+    <script>
+        function addOption() {
+            var optionsContainer = document.getElementById('optionsContainer');
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'option[]';
+            input.placeholder = 'Option ' + (optionsContainer.childElementCount + 1);
+            input.required = true;
+            optionsContainer.appendChild(input);
+            optionsContainer.appendChild(document.createElement('br'));
+
+            // Update the correct answer dropdown options
+            updateCorrectAnswerDropdown();
+        }
+
+        function updateCorrectAnswerDropdown() {
+            var options = document.querySelectorAll('input[name="option[]"]');
+            var correctAnswerDropdown = document.getElementById('correctAnswer');
+
+            // Remove existing options
+            correctAnswerDropdown.innerHTML = '';
+
+            // Add new options based on the current options
+            Array.from(options).forEach(function (option, index) {
+                var optionNumber = index + 1;
+                var optionText = 'Option ' + optionNumber;
+                var optionElement = document.createElement('option');
+                optionElement.value = optionText;
+                optionElement.textContent = optionText;
+                correctAnswerDropdown.appendChild(optionElement);
+            });
+        }
+
+        function createQuiz(event) {
+            event.preventDefault();
+
+            var quizTitle = document.getElementById('quizTitle').value;
+            var question = document.getElementById('question').value;
+            var options = document.querySelectorAll('input[name="option[]"]');
+            var correctAnswer = document.getElementById('correctAnswer').value;
+
+            // Log the quiz data (this is where you would send it to the server)
+            console.log('Quiz Title:', quizTitle);
+            console.log('Question:', question);
+            console.log('Options:', Array.from(options).map(option => option.value).join(', '));
+            console.log('Correct Answer:', correctAnswer);
+
+            // Clear the form for the next quiz
+            document.querySelector('#quizForm').reset();
+            document.querySelector('#optionsContainer').innerHTML = '';
+
+            // Here, you would send the quiz data to the server using AJAX or fetch
+            // Example using fetch (replace with your server endpoint)
+            /*
+            fetch('your-server-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    quizTitle: quizTitle,
+                    question: question,
+                    options: Array.from(options).map(option => option.value),
+                    correctAnswer: correctAnswer,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => console.log('Server response:', data))
+            .catch(error => console.error('Error:', error));
+            */
+        }
+    </script>
+
+</body>
+</html>

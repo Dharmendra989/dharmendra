@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <style>
+        body{
+        background-image:url(sign.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+    label{
+        color: rgb(248, 250, 251);
+    }
+    p{
+        color: rgb(241, 247, 247);
+    }
+    form{
+        margin-top: 170px;
+    }
+    </style>
+</head>
+<body>
+    <form action="link.html" align="center">
+        <label for="First">First Name:</label>
+        <input type="text" id="First" placeholder="Enter First Name" required><br><br>
+        <label for="second">Last Name:</label>
+        <input type="text" id="second" placeholder="Enter First Name" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter Email" required><br><br>
+        <label for="user">username:</label>
+        <input type="text" id="user" placeholder="Enter username" required><br><br>
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" placeholder="Enter password" required><br><br>
+        <p>Select your gender:-</p>
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="male" ><br>
+        <label for="female">Female</label>
+        <input type="radio" name="gender" id="female" ><br>
+        <label for="other">Other</label>
+        <input type="radio" name="gender" id="other" ><br><br>
+        <input type="submit" value="Sign in">
+
+    </form>
+</body>
+</html>
